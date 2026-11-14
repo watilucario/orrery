@@ -1,0 +1,18 @@
+{
+  "id": "finance",
+  "nom": "Finance",
+  "description": "Deux matières pour calculer juste : intérêts et actualisation, comptabilité de base. Tous les chiffres sont inventés.",
+  "libelle_matieres": "matières",
+  "vide": "Aucune matière prête pour l'instant.",
+  "galaxie": {
+    "teinte": 190,
+    "bras": 2,
+    "enroulement": 2.7,
+    "inclinaison": -0.35,
+    "aplatissement": 0.52
+  },
+  "matieres": [
+    "maths-financieres",
+    "comptabilite-base"
+  ]
+}

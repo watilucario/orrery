@@ -1,0 +1,15 @@
+{
+  "id": "mes-cours",
+  "nom": "Mes cours",
+  "description": "Les cours que tu importes, faits par une IA à partir de tes documents.",
+  "libelle_matieres": "cours",
+  "vide": "Aucun cours pour l'instant. Importe ton premier cours : Profil › Importer un cours.",
+  "galaxie": {
+    "teinte": 200,
+    "bras": 2,
+    "enroulement": 3,
+    "inclinaison": -0.3,
+    "aplatissement": 0.55
+  },
+  "matieres": ["premier-cours"]
+}

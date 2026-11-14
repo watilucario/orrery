@@ -1,0 +1,6 @@
+{
+  "name": "orrery-tests",
+  "private": true,
+  "description": "Vérification du moteur FSRS contre l'implémentation de référence ts-fsrs",
+  "devDependencies": { "ts-fsrs": "5.4.2" }
+}

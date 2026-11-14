@@ -1,0 +1,26 @@
+{
+  "id": "mathfin",
+  "modele": "matiere-de-cours",
+  "statut": "prête",
+  "titre": "Financial mathematics",
+  "titre_h1": "Financial mathematics quiz",
+  "stockage": "orr.demo.mathfin.",
+  "accueil": {
+    "surtitre": "Demo · interest and discounting",
+    "resume": "Simple interest, compound interest, discounting",
+    "intro": "Start with today's session, then choose how you want to revise.",
+    "sources": "Sources: standard mathematical definitions of simple interest, compound interest and discounting. All figures are made up and recalculated by hand."
+  },
+  "themes": [
+    {"id": "simples", "nom": "Simple interest"},
+    {"id": "composes", "nom": "Compound interest"},
+    {"id": "actu", "nom": "Discounting"}
+  ],
+  "blocs": {
+    "seance_du_jour": {},
+    "qcm": {"serie_rapide": {"simples": 4, "composes": 4, "actu": 4}},
+    "exercices": {"intro": "One written exercise: two calculations marked by the app, then an answer you mark yourself."},
+    "aide_claude": false,
+    "progression": {}
+  }
+}

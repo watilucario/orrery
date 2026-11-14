@@ -1,0 +1,18 @@
+{
+  "id": "sciences",
+  "nom": "Apprendre",
+  "description": "Comment la mémoire fonctionne et comment lire des chiffres : deux matières pour réviser mieux et comprendre une statistique.",
+  "libelle_matieres": "matières",
+  "vide": "Aucune matière prête pour l'instant.",
+  "galaxie": {
+    "teinte": 300,
+    "bras": 4,
+    "enroulement": 1.6,
+    "inclinaison": 0.5,
+    "aplatissement": 0.7
+  },
+  "matieres": [
+    "memoire-revision",
+    "statistiques"
+  ]
+}

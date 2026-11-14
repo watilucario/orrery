@@ -1,0 +1,30 @@
+{
+  "id": "memoire",
+  "modele": "matiere-de-cours",
+  "statut": "prête",
+  "titre": "Mémoire et révision",
+  "titre_h1": "Quiz de mémoire et révision",
+  "stockage": "orr.demo.memoire.",
+  "accueil": {
+    "surtitre": "Démo · comment on retient",
+    "resume": "Courbe de l'oubli, répétition espacée (FSRS), rappel actif",
+    "intro": "Ce cours explique pourquoi la séance du jour marche. Commence par elle, puis choisis comment réviser.",
+    "sources": "Sources : travaux d'Ebbinghaus (1885) sur l'oubli, littérature sur l'effet d'espacement et l'effet de test, dépôt open-source open-spaced-repetition (FSRS). Les valeurs de la courbe sont recalculées avec la forme simplifiée de la fiche."
+  },
+  "themes": [
+    {"id": "oubli", "nom": "La courbe de l'oubli"},
+    {"id": "espacement", "nom": "La répétition espacée"},
+    {"id": "rappel", "nom": "Le rappel actif"}
+  ],
+  "blocs": {
+    "seance_du_jour": {},
+    "qcm": {"serie_rapide": {"oubli": 5, "espacement": 5, "rappel": 5}},
+    "cas": {},
+    "exercices": {
+      "intro": "Des calculs avec la courbe de rétention de la fiche, puis une réponse rédigée.",
+      "note": "Les valeurs sont recalculées avec la forme simplifiée de la courbe (pente fixe)."
+    },
+    "aide_claude": false,
+    "progression": {}
+  }
+}

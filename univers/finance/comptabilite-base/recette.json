@@ -1,0 +1,25 @@
+{
+  "id": "compta",
+  "modele": "matiere-de-cours",
+  "statut": "prête",
+  "titre": "Comptabilité de base",
+  "titre_h1": "Quiz de comptabilité de base",
+  "stockage": "orr.demo.compta.",
+  "accueil": {
+    "surtitre": "Démo · bilan, écritures, résultat",
+    "resume": "Bilan, écritures au journal, charges, produits et résultat",
+    "intro": "Commence par la séance du jour, puis choisis comment réviser.",
+    "sources": "Sources : principes du plan comptable général français, présentés de façon simplifiée (TVA et impôt ignorés). Tous les chiffres sont inventés et recalculés."
+  },
+  "themes": [
+    {"id": "bilan", "nom": "Le bilan"},
+    {"id": "ecritures", "nom": "Les écritures"},
+    {"id": "resultat", "nom": "Le résultat"}
+  ],
+  "blocs": {
+    "seance_du_jour": {},
+    "qcm": {"serie_rapide": {"bilan": 5, "ecritures": 5, "resultat": 5}},
+    "aide_claude": false,
+    "progression": {}
+  }
+}

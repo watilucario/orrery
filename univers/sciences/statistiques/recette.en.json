@@ -1,0 +1,27 @@
+{
+  "id": "stats",
+  "modele": "matiere-de-cours",
+  "statut": "prête",
+  "titre": "Basic statistics",
+  "titre_h1": "Basic statistics quiz",
+  "stockage": "orr.demo.stats.",
+  "accueil": {
+    "surtitre": "Demo · reading and summarising data",
+    "resume": "Mean and median, standard deviation and quartiles, reading a figure or a chart in the news",
+    "intro": "Start with today's session, then pick how you want to revise: quiz, course, guided case or exercise.",
+    "sources": "Sources: standard definitions of descriptive statistics. All datasets are made up; means, medians, variances and standard deviations were recomputed with python3."
+  },
+  "themes": [
+    {"id": "centre", "nom": "Centre: mean, median, mode"},
+    {"id": "dispersion", "nom": "Spread: range, standard deviation, quartiles"},
+    {"id": "lire", "nom": "Reading a statistic"}
+  ],
+  "blocs": {
+    "seance_du_jour": {},
+    "qcm": {"serie_rapide": {"centre": 5, "dispersion": 5, "lire": 5}},
+    "cas": {},
+    "exercices": {},
+    "aide_claude": false,
+    "progression": {}
+  }
+}

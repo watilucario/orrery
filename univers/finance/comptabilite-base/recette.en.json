@@ -1,0 +1,25 @@
+{
+  "id": "compta",
+  "modele": "matiere-de-cours",
+  "statut": "prête",
+  "titre": "Basic accounting",
+  "titre_h1": "Basic accounting quiz",
+  "stockage": "orr.demo.compta.",
+  "accueil": {
+    "surtitre": "Demo · balance sheet, journal entries, profit or loss",
+    "resume": "Balance sheet, journal entries, expenses, revenue and profit or loss",
+    "intro": "Start with today's session, then choose how you want to revise.",
+    "sources": "Sources: principles of the French general chart of accounts (plan comptable général), simplified (VAT and income tax ignored). All figures are made up and recalculated."
+  },
+  "themes": [
+    {"id": "bilan", "nom": "The balance sheet"},
+    {"id": "ecritures", "nom": "Journal entries"},
+    {"id": "resultat", "nom": "Profit or loss"}
+  ],
+  "blocs": {
+    "seance_du_jour": {},
+    "qcm": {"serie_rapide": {"bilan": 5, "ecritures": 5, "resultat": 5}},
+    "aide_claude": false,
+    "progression": {}
+  }
+}

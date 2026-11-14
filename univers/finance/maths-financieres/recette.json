@@ -1,0 +1,26 @@
+{
+  "id": "mathfin",
+  "modele": "matiere-de-cours",
+  "statut": "prête",
+  "titre": "Maths financières",
+  "titre_h1": "Quiz de maths financières",
+  "stockage": "orr.demo.mathfin.",
+  "accueil": {
+    "surtitre": "Démo · intérêts et actualisation",
+    "resume": "Intérêts simples, intérêts composés, actualisation",
+    "intro": "Commence par la séance du jour, puis choisis comment réviser.",
+    "sources": "Sources : définitions mathématiques standard des intérêts simples, composés et de l'actualisation. Tous les chiffres sont inventés et recalculés à la main."
+  },
+  "themes": [
+    {"id": "simples", "nom": "Intérêts simples"},
+    {"id": "composes", "nom": "Intérêts composés"},
+    {"id": "actu", "nom": "Actualisation"}
+  ],
+  "blocs": {
+    "seance_du_jour": {},
+    "qcm": {"serie_rapide": {"simples": 4, "composes": 4, "actu": 4}},
+    "exercices": {"intro": "Un exercice rédigé : deux calculs corrigés par l'app, puis une réponse que tu juges toi-même."},
+    "aide_claude": false,
+    "progression": {}
+  }
+}

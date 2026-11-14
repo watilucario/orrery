@@ -1,0 +1,27 @@
+{
+  "id": "stats",
+  "modele": "matiere-de-cours",
+  "statut": "prête",
+  "titre": "Statistiques de base",
+  "titre_h1": "Quiz de statistiques de base",
+  "stockage": "orr.demo.stats.",
+  "accueil": {
+    "surtitre": "Démo · lire et résumer des données",
+    "resume": "Moyenne et médiane, écart-type et quartiles, lire un chiffre ou un graphique dans la presse",
+    "intro": "Commence par la séance du jour, puis choisis comment réviser : QCM, cours, cas guidé ou exercice.",
+    "sources": "Sources : définitions standard de la statistique descriptive. Tous les jeux de données sont inventés ; moyennes, médianes, variances et écarts-types ont été recalculés avec python3."
+  },
+  "themes": [
+    {"id": "centre", "nom": "Centre : moyenne, médiane, mode"},
+    {"id": "dispersion", "nom": "Dispersion : étendue, écart-type, quartiles"},
+    {"id": "lire", "nom": "Lire une statistique"}
+  ],
+  "blocs": {
+    "seance_du_jour": {},
+    "qcm": {"serie_rapide": {"centre": 5, "dispersion": 5, "lire": 5}},
+    "cas": {},
+    "exercices": {},
+    "aide_claude": false,
+    "progression": {}
+  }
+}

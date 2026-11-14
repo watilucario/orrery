@@ -1,0 +1,16 @@
+{
+  "id": "premier-cours",
+  "modele": "matiere-de-cours",
+  "statut": "en préparation",
+  "titre": "Ton premier cours",
+  "titre_h1": "Ton premier cours",
+  "stockage": "qfcc2.pk.premier-cours.",
+  "accueil": {
+    "surtitre": "Pour commencer",
+    "resume": "Importe un cours : Profil › Importer un cours",
+    "sources": "Sources : les documents que tu donnes à l'IA.",
+    "vide": "Pas encore de cours ici. Va dans Profil › Importer un cours : copie le modèle de réponse, donne-le à une IA avec ton cours (poly, slides, fiche), colle sa réponse, vérifie, puis ajoute. Le cours rejoint tes matières, avec la séance du jour, les QCM, les cas et les exercices."
+  },
+  "themes": [],
+  "blocs": {}
+}

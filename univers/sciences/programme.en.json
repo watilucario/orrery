@@ -1,0 +1,18 @@
+{
+  "id": "sciences",
+  "nom": "Learning",
+  "description": "How memory works and how to read numbers: two subjects to study better and make sense of a statistic.",
+  "libelle_matieres": "subjects",
+  "vide": "No subject is ready yet.",
+  "galaxie": {
+    "teinte": 300,
+    "bras": 4,
+    "enroulement": 1.6,
+    "inclinaison": 0.5,
+    "aplatissement": 0.7
+  },
+  "matieres": [
+    "memoire-revision",
+    "statistiques"
+  ]
+}

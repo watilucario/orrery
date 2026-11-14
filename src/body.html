@@ -1,0 +1,756 @@
+<canvas id="ciel" aria-hidden="true"></canvas>
+
+<div id="scene">
+<div class="wrap">
+
+<section id="onb" hidden>
+  <div class="top"><p class="eyebrow" id="onb-step"></p><button class="link" id="b-onb-skip" type="button" data-i18n="onb.onb_skip">Passer</button></div>
+  <div class="onb-dots" id="onb-dots" aria-hidden="true"></div>
+  <h1 class="h-mid" id="onb-title"></h1>
+  <div id="onb-body"></div>
+  <div class="onb-nav">
+    <button class="link" id="b-onb-prev" type="button" data-i18n="onb.onb_prev">← Précédent</button>
+    <button class="sbtn" id="b-onb-next" type="button" data-i18n="onb.onb_next">Suivant</button>
+  </div>
+</section>
+<section id="creer" hidden></section>
+<section id="langue" hidden>
+  <p class="eyebrow" id="lg-eyebrow" data-i18n="langue.eyebrow">Bienvenue</p>
+  <h1 class="h-mid" id="lg-titre" data-i18n="langue.titre">Choisis ta langue</h1>
+  <div class="chips regl-modes lg-choix" id="lg-choix" role="group" aria-label="Langue" data-i18n-aria="langue.aria"></div>
+  <p class="lead" id="lg-sous" data-i18n="langue.sous">Tu pourras la changer à tout moment dans Profil › Réglages. Ta progression ne dépend pas de la langue.</p>
+  <div class="lg-fin"><button class="sbtn" id="b-lg-ok" type="button" data-i18n="langue.continuer">Continuer</button></div>
+</section>
+<section id="carte" hidden>
+  <p class="src carte-fil" id="carte-fil" aria-live="polite"></p>
+  <div class="carte-cadre">
+    <canvas id="carte-cv" tabindex="0" role="application" aria-label="Carte des univers, de leurs systèmes et de leurs planètes. Écarte deux doigts pour entrer d'un niveau, rapproche-les pour remonter, touche un élément pour y aller ; la liste dessous donne les mêmes destinations." data-i18n-aria="carte.carte_cv_aria"></canvas>
+    <div class="carte-zoom">
+      <button class="carte-b" id="carte-plus" type="button" aria-label="Zoomer" data-i18n-aria="carte.carte_plus_aria">+</button>
+      <button class="carte-b" id="carte-moins" type="button" aria-label="Dézoomer" data-i18n-aria="carte.carte_moins_aria">−</button>
+      <button class="carte-b" id="carte-tout" type="button" aria-label="Voir tous les univers" data-i18n-aria="carte.carte_tout_aria">⤢</button>
+    </div>
+  </div>
+  <div class="carte-act" id="carte-act"></div>
+  <div class="chips carte-liste" id="carte-liste"></div>
+</section>
+<section id="agenda" lang="fr" hidden>
+  <div class="tete-ligne"><h1 class="h-mid" data-i18n="agenda.agenda">Agenda</h1><button class="nav-ico" id="b-ag-regl" type="button" aria-label="Réglages de l'agenda" aria-expanded="false" aria-controls="ag-regl" data-i18n-aria="agenda.ag_regl_aria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.2"/><circle cx="10" cy="17" r="2.2"/></svg></button></div>
+  <div class="seg" id="ag-vues">
+    <button class="seg-b" id="ag-vue-sem" type="button" aria-pressed="true" data-i18n="agenda.ag_vue_sem">Semaine</button>
+    <button class="seg-b" id="ag-vue-ex" type="button" aria-pressed="false" data-i18n="agenda.ag_vue_ex">Examens</button>
+  </div>
+  <div class="pcard ag-regl" id="ag-regl" hidden>
+    <div class="prow"><p class="plab" data-i18n="agenda.agendas_relies">Agendas reliés</p><div id="ag-lien"></div></div>
+    <div class="prow"><p class="plab" data-i18n="agenda.couleurs">Couleurs</p><div id="ag-couleurs"></div></div>
+  </div>
+  <div id="ag-semaine">
+    <div class="sem-nav">
+      <div class="sem-titres"><p class="sem-t" id="sem-titre" data-i18n="agenda.sem_titre">Semaine</p><p class="src" id="sem-sous"></p></div>
+      <div class="sem-fl">
+        <button class="sem-fb" id="b-sem-prev" type="button" aria-label="Semaine précédente" data-i18n-aria="agenda.sem_prev_aria">‹</button>
+        <button class="sem-fb" id="b-sem-next" type="button" aria-label="Semaine suivante" data-i18n-aria="agenda.sem_next_aria">›</button>
+      </div>
+    </div>
+    <button class="link sem-auj" id="b-sem-auj" type="button" hidden data-i18n="agenda.sem_auj">Revenir à la semaine en cours</button>
+    <div id="sem-etat"></div>
+    <div class="sem-zone" id="sem-zone"><div class="sem-piste" id="sem-piste"><div class="sem-grille" id="sem-grille"></div></div></div>
+    <div class="sem-legende" id="sem-legende"></div>
+    <div class="pcard sem-detail" id="sem-detail" hidden></div>
+    <p class="src sem-pied" id="sem-pied"></p>
+  </div>
+  <div id="ag-examens" hidden>
+    <div id="ag-exams"></div>
+    <button class="btn" id="b-exam-add" type="button"><span class="t" data-i18n="agenda.ajouter_un_examen">Ajouter un examen</span><span class="s" data-i18n="agenda.cc_partiel_ou_autre">CC, partiel ou autre, avec ton objectif de note</span></button>
+    <div id="ag-exam-form" class="pcard xform" hidden></div>
+  </div>
+</section>
+<section id="evol" hidden>
+  <div class="tete-ligne"><h1 class="h-mid" data-i18n="evol.progres">Progrès</h1><label class="ev-mat" id="ev-mat-l" hidden><span class="sr" data-i18n="evol.matiere">Matière</span><select class="field" id="ev-mat"></select></label></div>
+  <div id="evol-body"></div>
+  <div class="group ev-carnet" id="ev-carnet"></div>
+  <div id="progress"></div>
+  <details class="h-src ev-marches" id="ev-marches"><summary data-i18n="evol.comprendre_les_quatre_marches">Comprendre les quatre marches de la maîtrise</summary>
+    <p class="src" data-i18n="evol.chaque_chapitre_se_valide">Chaque chapitre se valide en quatre marches, de la plus simple à la plus exigeante. Une marche n'est validée que par des preuves : des questions réussies à plusieurs jours d'écart, pas une série faite d'un coup.</p>
+    <ol class="mai-marches"><li><b data-i18n="evol.comprendre">Comprendre</b><span data-i18n="evol.marche_comprendre_d"> : savoir ce que sont les notions, à quoi elles servent, et pourquoi.</span></li><li><b data-i18n="evol.savoir_faire">Savoir faire</b><span data-i18n="evol.marche_savoir_faire_d"> : appliquer la méthode sur des chiffres et arriver au bon résultat.</span></li><li><b data-i18n="evol.expliquer">Expliquer</b><span data-i18n="evol.marche_expliquer_d"> : justifier ce que tu fais, avec tes mots.</span></li><li><b data-i18n="evol.recommander">Recommander</b><span data-i18n="evol.marche_recommander_d"> : proposer une décision adaptée à la situation et la défendre.</span></li></ol>
+    <p class="src" data-i18n="evol.tu_les_retrouves_dans">Tu les retrouves dans l'onglet « Cours » de chaque matière, chapitre par chapitre.</p>
+  </details>
+</section>
+<section id="prof" hidden>
+  <h1 class="h-mid" data-i18n="prof.profil">Profil</h1>
+  <div class="pcard prof-carte" id="prof-carte">
+    <span class="prof-av" id="prof-av" aria-hidden="true"></span>
+    <div class="prof-id"><p class="prof-nom" id="prof-nom"></p><p class="src" id="prof-prog"></p></div>
+    <button class="link" id="b-prof-modif" type="button" data-i18n="prof.prof_modif">Modifier</button>
+  </div>
+  <form class="pcard prof-edit" id="prof-name-f" autocomplete="off" hidden>
+    <label class="plab" for="prof-prenom" data-i18n="prof.prenom">Prénom</label>
+    <input class="field" id="prof-prenom" type="text" maxlength="40" autocomplete="given-name" placeholder="Facultatif" data-i18n-ph="prof.prof_prenom_ph">
+    <div class="ag-btns"><button class="sbtn" type="submit" data-i18n="prof.enregistrer">Enregistrer</button><button class="link" id="b-prof-annuler" type="button" data-i18n="prof.prof_annuler">Annuler</button></div>
+  </form>
+  <p class="v-ok prof-ok" id="prof-ok" role="status" hidden data-i18n="prof.prof_ok">✓ Prénom enregistré</p>
+  <h2 data-i18n="prof.tes_cours_et_tes">Tes cours et tes données</h2>
+  <div class="group">
+    <button class="btn" id="b-prof-notes" type="button"><span class="t" data-i18n="prof.notes_et_surlignages">Notes et surlignages</span><span class="s" id="b-prof-notes-s" data-i18n="prof.prof_notes_s">Ce que tu as surligné ou noté dans tes fiches, et tes notes perso</span></button>
+    <button class="btn" id="b-prof-packs" type="button"><span class="t" data-i18n="prof.importer_un_cours">Importer un cours</span><span class="s" id="b-prof-packs-s" data-i18n="prof.prof_packs_s">Un pack fait par une IA à partir de ton cours</span></button>
+    <button class="btn" id="b-prof-sauve" type="button"><span class="t" data-i18n="prof.sauvegarder_ou_restaurer">Sauvegarder ou restaurer</span><span class="s" data-i18n="prof.toute_ta_progression_dans">Toute ta progression dans un fichier, à garder ou à emporter ailleurs</span></button>
+  </div>
+  <h2 data-i18n="prof.reglages">Réglages</h2>
+  <div class="pcard">
+    <div class="prow" hidden><p class="plab" data-i18n="prof.apparence">Apparence</p><div class="chips" id="regl-theme"></div><p class="src" data-i18n="prof.automatique_suit_le_reglage">Automatique suit le réglage de ton téléphone ou de ton ordinateur.</p></div>
+    <div class="prow"><p class="plab" data-i18n="prof.langue">Langue</p><div class="chips regl-modes" id="regl-langue"></div><p class="src" data-i18n="prof.langue_aide">Change la langue de l'app et de ses cours. Ta progression reste la même.</p></div>
+    <div class="prow"><p class="plab" data-i18n="prof.couleur_des_cours">Couleur des cours</p><div class="chips regl-modes" id="regl-fiche"></div><p class="src" data-i18n="prof.papier_une_feuille_claire">Papier : une feuille claire. Nuit : la même fiche en sombre. Le reste de l'app reste sombre.</p></div>
+    <div class="prow"><p class="plab" data-i18n="prof.questions_deja_sues">Questions déjà sues</p><div class="chips" id="regl-rappel"></div><p class="src" data-i18n="prof.dans_la_seance_du">Dans la séance du jour, une question réussie en étant sûr revient sans les choix : tu réponds de mémoire, puis tu compares à la réponse attendue. Retrouver une réponse ancre mieux que la reconnaître parmi quatre.</p></div>
+    <div class="prow"><p class="plab" data-i18n="prof.choix_des_qcm">Choix des QCM</p><div class="chips" id="regl-choix"></div><p class="src" data-i18n="prof.caches_d_abord_la">Cachés d'abord : la question s'affiche seule, tu cherches la réponse de tête, puis « Voir les choix ». Comme à l'examen, sans te laisser guider par les propositions. Tu peux aussi l'activer pour une seule série, en haut du quiz.</p></div>
+    <div class="prow" id="regl-donnees"></div>
+    <div class="prow" id="regl-iphone" hidden></div>
+    <div class="prow" id="regl-version"><p class="plab" data-i18n="prof.version">Version</p><p class="src"><b id="app-version">v18</b><span id="app-date" data-i18n="prof.app_date"> · 8 nov. 2026</span></p></div>
+  </div>
+  <h2 data-i18n="prof.aide">Aide</h2>
+  <div class="group" id="prof-sig">
+    <button class="btn" id="b-guide" type="button"><span class="t" data-i18n="prof.revoir_la_visite_guidee">Revoir la visite guidée</span><span class="s" data-i18n="prof.deux_minutes_pour_tout">Deux minutes pour tout comprendre</span></button>
+    <button class="btn" id="b-prof-contact" type="button"><span class="t" data-i18n="prof.contact">Contact</span><span class="s" data-i18n="prof.une_idee_une_gene">Une idée, une gêne, une question</span></button>
+    <button class="btn" id="b-prof-sigs" type="button" aria-expanded="false" aria-controls="prof-sigs"><span class="t" data-i18n="prof.mes_signalements">Mes signalements</span><span class="s" id="b-prof-sigs-s" data-i18n="prof.prof_sigs_s">Rien pour l'instant</span></button>
+  </div>
+  <div class="prof-sigs" id="prof-sigs" hidden></div>
+</section>
+<section id="packs" hidden>
+  <h1 class="h-mid" data-i18n="packs.importer_un_cours">Importer un cours</h1>
+  <p class="lead" data-i18n="packs.une_ia_transforme_ton">Une IA transforme ton cours en pack ; l'app le vérifie, puis l'ajoute à tes matières. Le pack reste dans ce navigateur : pense à la sauvegarde.</p>
+  <ol class="pk-etapes">
+    <li data-i18n="packs.copie_la_consigne">Copie la consigne.</li>
+    <li data-i18n="packs.colle_la_dans_l">Colle-la dans l'IA de ton choix (Claude, ChatGPT, Le Chat…) avec tous les documents d'un même cours. Elle te dit ce qu'elle a compris, te propose un plan et te pose ses questions : réponds, ajoute tes notes si tu veux, puis dis « vas-y ».</li>
+    <li data-i18n="packs.ouvre_le_fichier_du">Ouvre le fichier du pack qu'elle te rend, ou colle son texte ici. Vérifie, puis ajoute.</li>
+  </ol>
+  <p class="src" data-i18n="packs.nouvelles_seances_ou_correction">Nouvelles séances ou correction d'un cours déjà importé : « Compléter ou mettre à jour », sous ce cours en bas de page.</p>
+  <div class="ag-btns"><button class="sbtn" id="b-pk-modele" type="button" data-i18n="packs.pk_modele">Copier la consigne</button></div>
+  <p class="src pk-note" id="pk-modele-note" role="status"></p>
+  <div id="pk-modele-zone"></div>
+  <div class="pcard pk-saisie">
+    <div class="prow">
+      <label class="plab" for="pk-texte" data-i18n="packs.le_pack">Le pack</label>
+      <textarea class="field mono" id="pk-texte" rows="8" placeholder="# Pack · …" spellcheck="false" autocapitalize="off" autocorrect="off"></textarea>
+      <div class="ag-btns"><button class="sbtn" id="b-pk-verif" type="button" data-i18n="packs.pk_verif">Vérifier</button><label class="link pk-fichier" for="pk-fichier" data-i18n="packs.ouvrir_un_fichier">Ouvrir un fichier</label><input type="file" id="pk-fichier" accept=".md,.txt,text/plain,text/markdown" hidden></div>
+    </div>
+  </div>
+  <div id="pk-res" aria-live="polite"></div>
+  <h2 id="pk-liste-t" hidden data-i18n="packs.pk_liste_t">Cours importés</h2>
+  <div class="group" id="pk-liste"></div>
+</section>
+<section id="sauve" hidden>
+  <h1 class="h-mid" data-i18n="sauve.sauvegarde">Sauvegarde</h1>
+  <p class="lead" data-i18n="sauve.toute_ta_progression_dans">Toute ta progression dans un fichier : ta mémoire de révision, tes erreurs et tes marques, tes exercices, tes examens, tes réglages et tes cours importés.</p>
+  <div class="pcard">
+    <div class="prow">
+      <p class="plab" data-i18n="sauve.sauvegarder">Sauvegarder</p>
+      <p class="src" id="sv-info"></p>
+      <div class="ag-btns"><button class="sbtn" id="b-sv-fichier" type="button" data-i18n="sauve.sv_fichier">Télécharger le fichier</button><button class="link" id="b-sv-copier" type="button" data-i18n="sauve.sv_copier">Copier le texte</button></div>
+      <p class="src pk-note" id="sv-note" role="status"></p>
+      <div id="sv-zone"></div>
+    </div>
+    <div class="prow">
+      <p class="plab" data-i18n="sauve.restaurer">Restaurer</p>
+      <p class="src" data-i18n="sauve.remplace_ce_qui_est">Remplace ce qui est gardé dans ce navigateur par une sauvegarde, puis relance l'app.</p>
+      <textarea class="field mono" id="sv-texte" rows="3" placeholder="Colle ici le texte d'une sauvegarde" spellcheck="false" autocapitalize="off" autocorrect="off" data-i18n-ph="sauve.sv_texte_ph"></textarea>
+      <div class="ag-btns"><button class="sbtn" id="b-sv-restaurer" type="button" data-i18n="sauve.sv_restaurer">Restaurer</button><label class="link pk-fichier" for="sv-fichier" data-i18n="sauve.ouvrir_un_fichier">Ouvrir un fichier</label><input type="file" id="sv-fichier" accept=".json,application/json,text/plain" hidden></div>
+      <div class="pk-conf" id="sv-conf" hidden>
+        <p id="sv-conf-t"></p>
+        <div class="ag-btns"><button class="sbtn" id="b-sv-oui" type="button" data-i18n="sauve.sv_oui">Oui, remplacer</button><button class="link" id="b-sv-non" type="button" data-i18n="sauve.sv_non">Annuler</button></div>
+      </div>
+      <p class="src pk-note" id="sv-res" role="status"></p>
+    </div>
+  </div>
+  <p class="src" id="sv-compte"></p>
+  <h2 data-i18n="sauve.changer_de_version">Changer de version</h2>
+  <div class="pcard">
+    <div class="prow" id="sv-export">
+      <p class="plab" data-i18n="sauve.tout_exporter">Tout exporter</p>
+      <p class="src" data-i18n="sauve.pour_passer_a_une">Pour passer à une autre version de l'app (Maitrise) ou à un autre appareil : tes univers, tes matières avec leur cours, ta progression et ton profil, dans un seul fichier.</p>
+      <div class="ag-btns"><button class="sbtn" id="b-dx-fichier" type="button" data-i18n="sauve.dx_fichier">Télécharger le fichier</button><button class="link" id="b-dx-copier" type="button" data-i18n="sauve.dx_copier">Copier le texte</button></div>
+      <p class="src pk-note" id="dx-note" role="status"></p>
+      <div id="dx-zone"></div>
+    </div>
+    <div class="prow" id="sv-import" hidden>
+      <p class="plab" data-i18n="sauve.importer_des_donnees">Importer des données</p>
+      <p class="src" data-i18n="sauve.le_fichier_tout_exporter">Le fichier « Tout exporter » d'une autre version : il remplace ce que l'app garde sur cet appareil.</p>
+      <div id="sv-import-w"></div>
+    </div>
+  </div>
+</section>
+<section id="hub" hidden>
+  <div class="orr" id="orr">
+    <canvas class="orr-gl" id="orr-gl" aria-hidden="true"></canvas>
+    <canvas class="orr-cv" id="orr-cv" aria-hidden="true"></canvas>
+    <div class="orr-haut">
+      <p class="eyebrow" id="hub-date"></p>
+      <div class="orr-liens">
+        <button class="univ-pastille" id="b-hub-univers" type="button" hidden></button>
+      </div>
+    </div>
+    <h1 id="hub-titre" data-i18n="hub.hub_titre">Aujourd'hui</h1>
+    <p class="orr-sous" id="hub-sous"></p>
+    <div class="orr-chips" id="hub-mats-sel" role="group" aria-label="Matière de l'accueil" data-i18n-aria="hub.hub_mats_sel_aria"></div>
+    <div class="orr-scene" id="hub-today"></div>
+    <div class="orr-cta" id="hub-cta"></div>
+    <div class="stats" id="hub-stats" hidden></div>
+  </div>
+  <div id="hub-suite"></div>
+  <div id="hub-depart"></div>
+  <div id="hub-exams"></div>
+  <div id="hub-agenda"></div>
+  <h2 id="hub-mats-t" hidden data-i18n="hub.hub_mats_t">Tes matières</h2>
+  <div class="group" id="hub-mats" hidden></div>
+</section>
+<section id="bach" hidden>
+  <h1 id="bach-titre" data-i18n="bach.bach_titre">Réviser</h1>
+  <button type="button" class="rch-entree" id="b-bach-cherche" aria-label="Chercher dans tes cours (raccourci : touche /)" hidden data-i18n-aria="bach.bach_cherche_aria">
+    <svg class="rch-loupe" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12.7 12.7L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span class="rch-entree-t" data-i18n="bach.chercher_dans_tes_cours">Chercher dans tes cours</span><kbd>/</kbd>
+  </button>
+  <div class="univ-bascule" id="bach-univers" hidden></div>
+  <div id="bach-list"></div>
+  <div class="group bach-carnet" id="bach-carnet"></div>
+  <p class="bach-outils"><button type="button" class="link" id="b-bach-couleurs" aria-expanded="false" aria-controls="bach-couleurs" data-i18n="bach.bach_couleurs">Couleurs des matières</button></p>
+  <div class="mcol" id="bach-couleurs" hidden></div>
+</section>
+
+<section id="home" hidden>
+  <p class="eyebrow" id="h-eyebrow"></p>
+  <p class="al-home" id="h-plan" hidden><button type="button" class="link" id="b-h-plan" data-i18n="home.h_plan">Plan du jour ›</button></p>
+  <p class="al-home" id="h-alire" hidden><button type="button" class="link" id="b-h-alire" data-i18n="home.h_alire">À lire avant l'examen ›</button></p>
+  <h1 id="h-title"></h1>
+  <div id="h-etat"></div>
+  <div id="home-empty" class="empty" hidden></div>
+  <div id="home-remplir"></div>
+  <div id="home-body"></div>
+  <details class="h-src" id="h-src-d"><summary data-i18n="home.sources_du_contenu">Sources du contenu</summary><p class="src" id="h-src"></p></details>
+</section>
+<section id="chap" hidden>
+  <p class="eyebrow" id="ch-eyebrow"></p>
+  <h1 class="h-mid" id="ch-titre"></h1>
+  <p class="statline" id="ch-etat"></p>
+  <div class="ch-radar" id="ch-radar"></div>
+  <div id="ch-cours"></div>
+  <div id="ch-act"></div>
+  <div id="ch-carnet"></div>
+  <div id="ch-marches"></div>
+  <div id="ch-suite"></div>
+</section>
+
+<section id="qcm" hidden>
+  <h1 class="h-mid" data-i18n="qcm.qcm">QCM</h1>
+  <p class="lead" data-i18n="qcm.une_question_quatre_reponses">Une question, quatre réponses, la correction tout de suite. Après ta réponse, dis si tu es sûr : c'est ce qui règle quand la question reviendra.</p>
+  <h2 data-i18n="qcm.series">Séries</h2>
+  <div class="grid2" id="main-btns"></div>
+  <h2 data-i18n="qcm.par_theme">Par thème</h2>
+  <div class="group" id="themes"></div>
+</section>
+<section id="plan" hidden>
+  <p class="eyebrow" id="pl-eyebrow"></p>
+  <h1 class="h-mid" id="pl-titre" data-i18n="plan.pl_titre">Plan du jour</h1>
+  <p class="lead" id="pl-lead"></p>
+  <div id="pl-frise" class="pl-frise" role="img" aria-label="Ton calendrier de révision" data-i18n-aria="plan.pl_frise_aria"></div>
+  <div id="pl-volume" class="pl-volume"></div>
+  <div id="pl-niveaux" class="pl-niveaux"></div>
+  <div id="pl-cartes"></div>
+  <div id="pl-actions" class="pl-actions"></div>
+  <div id="pl-expl" class="pl-expl" hidden></div>
+  <h2 class="h-sous" id="pl-suite-t" hidden data-i18n="plan.pl_suite_t">Les jours suivants</h2>
+  <div id="pl-suite" class="group"></div>
+  <p class="al-fin"><button type="button" class="link" id="b-pl-exam" data-i18n="plan.pl_exam">Ajouter ou modifier ma date d'examen</button></p>
+</section>
+
+<section id="recherche" hidden>
+  <h1 class="h-mid" data-i18n="recherche.recherche">Recherche</h1>
+  <form id="rch-form" role="search" autocomplete="off" novalidate>
+    <label class="rch-lab" for="rch-q" data-i18n="recherche.chercher_dans_tes_cours">Chercher dans tes cours</label>
+    <div class="rch-champ">
+      <input class="field" id="rch-q" type="search" inputmode="search" enterkeyhint="search" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="80" placeholder="crédit-bail, besoin en fonds de roulement…" aria-describedby="rch-aide rch-etat" data-i18n-ph="recherche.rch_q_ph">
+      <button type="button" class="rch-x" id="b-rch-effacer" aria-label="Effacer la recherche" hidden data-i18n-aria="recherche.rch_effacer_aria">×</button>
+    </div>
+    <div class="rch-portee" id="rch-portee">
+      <label class="rch-case"><input type="checkbox" id="rch-tous"> <span data-i18n="recherche.tous_les_univers">Tous les univers</span></label>
+      <span class="src" id="rch-univ"></span>
+    </div>
+  </form>
+  <p class="statline rch-etat" id="rch-etat" role="status" aria-live="polite"></p>
+  <p class="lead rch-aide" id="rch-aide" data-i18n="recherche.rch_aide">Tape un mot, ou plusieurs : ils doivent tous être dans le passage. Je cherche dans les fiches, les synthèses, les énoncés des questions, des cas et des exercices, les modèles de documents, les thèmes et les matières, sans regarder les réponses.</p>
+  <p class="src kbd-hint" id="rch-kbd" data-i18n="recherche.rch_kbd">Clavier : ↓ pour aller aux résultats, ↑ ↓ pour passer de l'un à l'autre, Entrée pour ouvrir, / pour revenir au champ.</p>
+  <div id="rch-res"></div>
+</section>
+<section id="lire" hidden>
+  <p class="eyebrow" id="al-eyebrow"></p>
+  <h1 class="h-mid" data-i18n="lire.a_lire_avant">À lire avant</h1>
+  <p class="lead" id="al-lead"></p>
+  <div id="al-prog"></div>
+  <div id="al-liste"></div>
+  <p class="al-fin"><button type="button" class="link" id="b-al-modif" data-i18n="lire.al_modif">Modifier l'examen ou ses thèmes</button></p>
+</section>
+
+<section id="cours" hidden>
+  <h1 class="h-mid" data-i18n="cours.cours">Cours</h1>
+  <p class="lead" data-i18n="cours.une_fiche_par_theme">Une fiche par thème : l'essentiel à retenir, puis le cours pas à pas, avec un exemple tiré de tes cas. Lis la fiche d'un thème avant ses questions.</p>
+  <p class="src cours-revue" id="cours-revue" hidden></p>
+  <div class="group" id="cours-liste"></div>
+  <p class="src" id="cours-manque" hidden></p>
+</section>
+<section id="fiche" hidden>
+  <p class="eyebrow" id="fi-eyebrow"></p>
+  <h1 class="h-mid" id="fi-titre"></h1>
+  <p class="statline" id="fi-duree"></p>
+  <div class="seg fi-mode" id="fi-mode" role="group" aria-label="Couleur de la fiche" data-i18n-aria="fiche.fi_mode_aria"><button class="seg-b" type="button" data-m="papier" data-i18n="fiche.papier">Papier</button><button class="seg-b" type="button" data-m="nuit" data-i18n="fiche.nuit">Nuit</button></div>
+  <p class="fi-ex" id="fi-ex-w" hidden><button class="chip" id="b-fi-ex" type="button" aria-pressed="true"></button></p>
+  <details class="revue" id="fi-revue" hidden><summary id="fi-revue-s"></summary><div class="revue-c" id="fi-revue-c"></div></details>
+  <p class="lead fi-intro" id="fi-intro" hidden></p>
+  <nav class="fi-plan" id="fi-plan" aria-label="Plan de la fiche" hidden data-i18n-aria="fiche.fi_plan_aria"></nav>
+  <div class="cours cours-ess" id="fi-ess"></div>
+  <div class="cours" id="fi-corps"></div>
+  <div class="cours cours-ess fi-ret" id="fi-ret" hidden></div>
+  <details class="fi-avant" id="fi-avant" hidden></details>
+  <p class="src" id="fi-src"></p>
+  <p class="sig-l"><button class="link sig-b" id="b-sig-fi" type="button" data-i18n="fiche.sig_fi">Signaler une erreur dans cette fiche</button></p>
+  <div id="fi-actions"></div>
+</section>
+<section id="docs" hidden>
+  <h1 class="h-mid" id="docs-titre" data-i18n="docs.docs_titre">Modèles</h1>
+  <p class="lead" data-i18n="docs.les_documents_de_l">Les documents de l'examen dans leur ordre, ligne par ligne : le code de chaque ligne dans la liasse fiscale, et ce que ton analyse en fait. Pour savoir où chercher chaque chiffre le jour J.</p>
+  <input class="field docs-q" id="docs-q" type="search" autocomplete="off" spellcheck="false" placeholder="Chercher : crédit-bail, escompte, DU…" aria-label="Chercher une ligne dans les documents" data-i18n-aria="docs.docs_q_aria" data-i18n-ph="docs.docs_q_ph">
+  <div class="chips docs-seg" id="docs-seg"></div>
+  <p class="src" id="docs-nb"></p>
+  <div id="docs-corps"></div>
+  <p class="src" id="docs-src"></p>
+</section>
+<section id="notes" hidden>
+  <h1 class="h-mid" data-i18n="notes.notes_et_surlignages">Notes et surlignages</h1>
+  <p class="lead" data-i18n="notes.ce_que_tu_as">Ce que tu as surligné ou noté dans tes fiches, et tes notes perso. Pour surligner : sélectionne un passage d'une fiche, puis «&nbsp;+&nbsp;».</p>
+  <div class="nt-barre">
+    <label class="cn-f" id="nt-mat-l"><span class="plab" data-i18n="notes.matiere">Matière</span><select class="field" id="nt-mat"></select></label>
+    <div class="nt-boutons"><button class="sbtn" id="b-nt-nouv" type="button" data-i18n="notes.nt_nouv">+ Nouvelle note</button><button class="link" id="b-nt-copier" type="button" data-i18n="notes.nt_copier">Copier tout pour ton IA</button></div>
+  </div>
+  <p class="src" id="nt-copie-note" role="status"></p><div id="nt-copie-zone"></div>
+  <div id="nt-liste"></div>
+</section>
+<section id="carnet" hidden>
+  <h1 class="h-mid" data-i18n="carnet.carnet_d_erreurs">Carnet d'erreurs</h1>
+  <p class="lead" id="cn-regle"></p>
+  <div class="cn-filtres">
+    <label class="cn-f" id="cn-mat-l"><span class="plab" data-i18n="carnet.matiere">Matière</span><select class="field" id="cn-mat"></select></label>
+    <label class="cn-f" id="cn-th-l" hidden><span class="plab" data-i18n="carnet.theme">Thème</span><select class="field" id="cn-th"></select></label>
+  </div>
+  <div class="chips cn-seg" id="cn-seg"></div>
+  <div class="group" id="cn-go"></div>
+  <div id="cn-liste"></div>
+</section>
+<section id="conslist" hidden>
+  <h1 class="h-mid" id="cons-titre" data-i18n="conslist.cons_titre">Construire</h1>
+  <p class="lead" data-i18n="conslist.tu_construis_un_tableau">Tu construis un tableau comme à l'examen, ligne par ligne. À chaque ligne, la liasse s'affiche vierge : touche la ou les cases qui servent, avec leur signe, puis vérifie. Pour savoir prendre chaque chiffre au bon endroit, et dans le bon sens.</p>
+  <div class="group" id="cons-list"></div>
+</section>
+<section id="cons" hidden>
+  <p class="eyebrow" id="cq-eyebrow"></p>
+  <h1 class="h-small" id="cq-titre"></h1>
+  <div class="bar cq-prog"><i id="cq-bar"></i></div>
+  <details class="cq-d" id="cq-ctx-d"><summary data-i18n="cons.l_enonce">L'énoncé</summary><div class="ctx" id="cq-ctx"></div></details>
+  <details class="cq-d" id="cq-fait-d" open><summary id="cq-fait-t" data-i18n="cons.cq_fait_t">Ton tableau</summary><div id="cq-fait"></div></details>
+  <div class="cq-ligne" id="cq-ligne">
+    <p class="eyebrow" data-i18n="cons.ligne_a_construire">Ligne à construire</p>
+    <h2 class="cq-l-t" id="cq-l-t"></h2>
+    <p class="src" id="cq-l-s"></p>
+    <div class="cq-sel" id="cq-sel" aria-live="polite"></div>
+    <div class="fb" id="cq-fb" hidden aria-live="polite"></div>
+  </div>
+  <div class="cq-pal" id="cq-pal">
+    <div class="seg cq-rempli" id="cq-rempli">
+      <button class="seg-b" id="b-cq-vierge" type="button" aria-pressed="true" data-i18n="cons.cq_vierge">Liasse vierge</button>
+      <button class="seg-b" id="b-cq-chiffres" type="button" aria-pressed="false" data-i18n="cons.cq_chiffres">Avec les chiffres</button>
+    </div>
+    <input class="field docs-q" id="cq-q" type="search" autocomplete="off" spellcheck="false" placeholder="Chercher une case : emprunts, stocks, DU…" aria-label="Chercher une case dans les documents" data-i18n-aria="cons.cq_q_aria" data-i18n-ph="cons.cq_q_ph">
+    <div class="chips docs-seg" id="cq-seg"></div>
+    <p class="src" id="cq-nb"></p>
+    <div class="cq-doc" id="cq-doc"></div>
+  </div>
+  <div class="nextbar cq-nextbar" id="cq-bar-b">
+    <div class="cq-aides">
+      <button class="link" id="b-cq-ind" type="button" hidden data-i18n="cons.cq_ind">Un indice</button>
+      <button class="link" id="b-cq-cor" type="button" hidden data-i18n="cons.cq_cor">Voir la correction</button>
+    </div>
+    <button class="btn primary" id="b-cq-ok" type="button"><span class="t" data-i18n="cons.verifier">Vérifier</span></button>
+  </div>
+  <div id="cq-fin" hidden>
+    <h2 data-i18n="cons.ton_tableau_termine">Ton tableau terminé</h2>
+    <div id="cq-fin-c"></div>
+    <div class="group">
+      <button class="btn primary" id="b-cq-refaire" type="button"><span class="t" data-i18n="cons.recommencer_ce_tableau">Recommencer ce tableau</span></button>
+      <button class="btn" id="b-cq-fiche" type="button"><span class="t" data-i18n="cons.relire_la_fiche_du">Relire la fiche du thème</span></button>
+      <button class="btn" id="b-cq-liste" type="button"><span class="t" data-i18n="cons.autres_tableaux_a_construire">Autres tableaux à construire</span></button>
+    </div>
+  </div>
+</section>
+<section id="caslist" hidden>
+  <h1 class="h-mid" data-i18n="caslist.cas_guides">Cas guidés</h1>
+  <p class="lead" data-i18n="caslist.une_situation_complete_puis">Une situation complète, puis des questions à choix, étape par étape. Pour appliquer le cours avant les exercices rédigés.</p>
+  <div class="group" id="cas"></div>
+</section>
+<section id="quiz" hidden>
+  <div class="top">
+    <div class="top-g">
+      <button class="link" id="b-mark" type="button" aria-pressed="false" data-i18n="quiz.mark">☆ Marquer</button>
+      <button class="link" id="b-choix" type="button" aria-pressed="false" title="Cacher les choix pour cette série" data-i18n="quiz.choix" data-i18n-title="quiz.choix_title">○ Réfléchir d'abord</button>
+    </div>
+    <div class="score" id="score">0 / 0</div>
+  </div>
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="pause" id="pause" hidden>
+    <p><b data-i18n="quiz.24_minutes_de_travail">24 minutes de travail d'affilée.</b> <span data-i18n="quiz.pause_suite">Fais une pause de 6 minutes : lève-toi, bois de l'eau, sans écran. Des pauses fixes réduisent la fatigue et gardent la concentration.</span></p>
+    <button class="link" id="b-pause-ok" type="button" data-i18n="quiz.pause_ok">D'accord</button>
+  </div>
+  <p class="eyebrow" id="qmeta"></p>
+  <div class="ctx" id="ctx" hidden></div>
+  <h2 class="q" id="qtext"></h2>
+  <button class="link" id="b-bareme" type="button" hidden data-i18n="quiz.bareme">Afficher le barème fourni</button>
+  <div class="bareme" id="bareme" hidden></div>
+  <button class="link rep-b" id="b-rep" type="button" aria-controls="rep" aria-expanded="false" hidden data-i18n="quiz.rep">Où trouver ça dans les documents ?</button>
+  <div class="rep" id="rep" hidden></div>
+  <div class="pause tip" id="tip-q" hidden>
+    <p><b data-i18n="quiz.premiere_seance">Première séance.</b> <span data-i18n="quiz.tip_q_suite">Choisis ta réponse, puis dis si tu es sûr. Sois honnête : c'est ce qui fixe la date de la prochaine révision.</span></p>
+    <button class="link" id="b-tip-q" type="button" data-i18n="quiz.tip_q">Compris</button>
+  </div>
+  <div id="opts"></div>
+  <div class="nextbar choix-bar" id="choix-bar" hidden>
+    <p class="choix-t" data-i18n="quiz.reflechis_d_abord_ta">Réfléchis d'abord : ta réponse en tête, puis regarde les choix.</p>
+    <button class="btn" id="b-voir-choix" type="button" data-i18n="quiz.voir_choix">Voir les choix</button>
+  </div>
+  <div class="rl" id="rl" hidden>
+    <p class="rl-t" id="rl-t" data-i18n="quiz.rl_t">Sans les choix : tu l'avais réussie en étant sûr. Réponds de mémoire, avec tes mots.</p>
+    <input class="field rl-in" id="rl-in" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="Ta réponse" aria-label="Ta réponse, de mémoire" data-i18n-aria="quiz.rl_in_aria" data-i18n-ph="quiz.rl_in_ph">
+    <div class="ag-btns" id="rl-act"><button class="sbtn" id="b-rl-ok" type="button" data-i18n="quiz.rl_ok">Valider</button><button class="link" id="b-rl-nsp" type="button" data-i18n="quiz.rl_nsp">Je ne sais plus</button></div>
+    <div class="rl-rev" id="rl-rev" hidden>
+      <p class="rl-l" data-i18n="quiz.reponse_attendue">Réponse attendue</p>
+      <p class="rl-att" id="rl-att"></p>
+      <p class="src rl-ind" id="rl-ind"></p>
+      <div id="rl-juge">
+        <p class="rl-q" data-i18n="quiz.ta_reponse_disait_elle">Ta réponse disait-elle la même chose ?</p>
+        <div class="conf-row"><button class="cbtn" id="b-rl-faux" type="button"><span data-i18n="quiz.rl_faux">Non, raté</span><kbd>N</kbd></button><button class="cbtn" id="b-rl-juste" type="button"><span data-i18n="quiz.rl_juste">Oui, juste</span><kbd>O</kbd></button></div>
+      </div>
+    </div>
+  </div>
+  <div id="conf-home"><div class="conf" id="conf" hidden>
+    <p class="conf-q" data-i18n="quiz.avant_la_correction_tu">Avant la correction, tu es :</p>
+    <div class="conf-row">
+      <button class="cbtn" id="cf-guess" type="button"><span data-i18n="quiz.cf_guess">Au hasard</span><kbd data-i18n="quiz.kbd_guess">H</kbd></button>
+      <button class="cbtn" id="cf-hes" type="button"><span data-i18n="quiz.cf_hes">J'hésite</span><kbd data-i18n="quiz.kbd_hes">J</kbd></button>
+      <button class="cbtn" id="cf-sure" type="button"><span data-i18n="quiz.cf_sure">Sûr</span><kbd data-i18n="quiz.kbd_sure">S</kbd></button>
+    </div>
+  </div></div>
+  <div class="fb" id="fb" hidden aria-live="polite">
+    <p class="fbh" id="fbh"></p>
+    <p id="fbe"></p>
+    <p class="fbn" id="fbn" hidden></p>
+    <p class="src" id="fbs"></p>
+    <details class="fb-cours" id="fb-cours" hidden><summary id="fb-cours-t"></summary><div class="cours" id="fb-cours-c"></div></details>
+    <details class="fb-cours fb-rep" id="fb-rep" hidden><summary id="fb-rep-t"></summary><div class="doc" id="fb-rep-c"></div></details>
+    <p class="sig-l"><button class="link sig-b" id="b-sig-q" type="button" data-i18n="quiz.sig_q">Signaler une erreur</button></p>
+  </div>
+  <div class="pause tip" id="tip-fb" hidden>
+    <p id="tip-fb-t"></p>
+    <button class="link" id="b-tip-fb" type="button" data-i18n="quiz.tip_fb">Compris</button>
+  </div>
+  <div class="ask" id="ask" hidden>
+    <button class="askbtn" id="b-explain" type="button" data-i18n="quiz.explain">Explique-moi simplement</button>
+    <div class="aibox" id="aibox" hidden>
+      <p class="eyebrow" style="margin-bottom:8px" data-i18n="quiz.explication_de_claude">Explication de Claude</p>
+      <div class="aitext" id="aitext" aria-live="polite"></div>
+      <p class="src" id="ainote"></p>
+      <button class="link" id="b-stop" type="button" hidden data-i18n="quiz.stop">Arrêter</button>
+      <div class="chips">
+        <button class="chip" id="c-ex" type="button" data-i18n="quiz.c_ex">Un exemple chiffré</button>
+        <button class="chip" id="c-why" type="button" data-i18n="quiz.c_why">Pourquoi pas les autres réponses ?</button>
+      </div>
+      <form class="aform" id="aform" autocomplete="off">
+        <input id="ainput" type="text" placeholder="Une question sur celle-ci ?" aria-label="Ta question sur cette question" data-i18n-aria="quiz.ainput_aria" data-i18n-ph="quiz.ainput_ph">
+        <button id="b-send" type="submit" data-i18n="quiz.send">Envoyer</button>
+      </form>
+    </div>
+  </div>
+  <div class="ask" id="copie-ia" hidden>
+    <button class="askbtn" id="b-copie-ia" type="button" data-i18n="quiz.copie_ia">Copier la question pour ton IA</button>
+    <p class="src pk-note" id="copie-ia-note" role="status"></p>
+    <div id="copie-ia-zone"></div>
+  </div>
+  <div class="nextbar" id="nextbar" hidden><button class="btn primary" id="b-next" type="button" hidden><span class="t" id="b-next-t" data-i18n="quiz.next_t">Question suivante</span></button></div>
+  <p class="src" id="ai-cost" hidden data-i18n="quiz.ai_cost">Seule l'aide de Claude utilise ton forfait Claude. Le reste de l'app n'en consomme pas.</p>
+  <p class="src kbd-hint" id="q-kbd" data-i18n="quiz.q_kbd">Clavier : A à D pour répondre, H, J ou S pour ta confiance, Entrée pour continuer.</p>
+</section>
+
+<section id="result" hidden>
+  <p class="eyebrow" id="r-mode"></p>
+  <div class="big" id="r-score"></div>
+  <p id="r-verdict" style="font-weight:600"></p>
+  <p class="lead" id="r-next" hidden></p>
+  <div class="r-actions">
+    <button class="btn primary" id="b-redo" type="button" hidden><span class="t" data-i18n="result.refaire_mes_erreurs_de">Refaire mes erreurs de cette série</span></button>
+    <button class="btn" id="b-again" type="button"><span class="t" data-i18n="result.relancer_la_meme_serie">Relancer la même série</span></button>
+    <button class="btn" id="b-home" type="button"><span class="t" id="b-home-t" data-i18n="result.home_t">Retour</span></button>
+  </div>
+  <div id="r-weak" hidden></div>
+  <h2 data-i18n="result.par_theme">Par thème</h2>
+  <div id="r-themes"></div>
+  <details class="r-missed" id="r-missed-wrap">
+    <summary id="r-missed-t" data-i18n="result.r_missed_t">À revoir</summary>
+    <div id="r-missed"></div>
+  </details>
+</section>
+
+<section id="drillstart" hidden>
+  <p class="eyebrow" data-i18n="drillstart.sans_calculatrice">Sans calculatrice</p>
+  <h1 class="h-mid" data-i18n="drillstart.calcul_mental_et_pieges">Calcul mental et pièges chiffrés</h1>
+  <p class="lead" data-i18n="drillstart.des_calculs_tires_au">Des calculs tirés au hasard, avec les chiffres du cours. Quand ta réponse correspond à une erreur classique, l'écran te dit laquelle.</p>
+  <h2 data-i18n="drillstart.theme">Thème</h2>
+  <div id="dr-cats"></div>
+  <h2 data-i18n="drillstart.longueur">Longueur</h2>
+  <div id="dr-lens"></div>
+  <button class="btn primary" id="b-drgo" type="button" style="margin-top:14px"><span class="t" data-i18n="drillstart.lancer">Lancer</span><span class="s" data-i18n="drillstart.reponds_au_calcul_sans">Réponds au calcul, sans calculatrice. Vise moins de 30 secondes par question.</span></button>
+  <details class="ss-detail">
+    <summary data-i18n="drillstart.les_pieges_chiffres_en">Les pièges chiffrés en un coup d'œil</summary>
+    <ul class="rules" id="dr-traps"></ul>
+  </details>
+</section>
+
+<section id="drill" hidden>
+  <div class="top">
+    <div class="score" id="dr-time">00:00</div>
+    <div class="score" id="dr-score">0 / 0</div>
+  </div>
+  <div class="bar"><i id="dr-bar"></i></div>
+  <p class="eyebrow" id="dr-meta"></p>
+  <h2 class="q" id="dr-q"></h2>
+  <button class="link" id="b-drbareme" type="button" hidden data-i18n="drill.drbareme">Afficher le barème fourni</button>
+  <div class="bareme" id="drbareme" hidden></div>
+  <form id="dr-form" autocomplete="off">
+    <div class="inrow"><input class="field" id="dr-in" type="text" inputmode="decimal" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Ta réponse" data-i18n-aria="drill.dr_in_aria"><span class="unit" id="dr-unit"></span></div>
+    <button class="btn primary" id="b-drok" type="submit" style="margin-top:12px"><span class="t" data-i18n="drill.valider">Valider</span></button>
+  </form>
+  <div class="fb" id="dr-fb" hidden aria-live="polite">
+    <p class="fbh" id="dr-fbh"></p>
+    <p id="dr-trap" class="v-ko" hidden></p>
+    <p id="dr-fbe"></p>
+    <p class="src" id="dr-fbt"></p>
+  </div>
+  <div class="nextbar" id="dr-nextbar" hidden><button class="btn primary" id="b-drnext" type="button" hidden><span class="t" id="b-drnext-t" data-i18n="drill.drnext_t">Question suivante</span></button></div>
+</section>
+
+<section id="drillres" hidden>
+  <p class="eyebrow" id="drr-meta"></p>
+  <div class="big" id="drr-score"></div>
+  <p id="drr-line" style="font-weight:600"></p>
+  <h2 data-i18n="drillres.par_theme">Par thème</h2>
+  <div id="drr-cats"></div>
+  <div id="drr-traps-wrap">
+    <h2 data-i18n="drillres.pieges_dans_lesquels_tu">Pièges dans lesquels tu es tombé</h2>
+    <div id="drr-traps"></div>
+  </div>
+  <div id="drr-missed-wrap">
+    <h2 data-i18n="drillres.a_revoir">À revoir</h2>
+    <div id="drr-missed"></div>
+  </div>
+  <div style="margin-top:18px" id="drr-actions"></div>
+</section>
+
+<section id="simstart" hidden>
+  <p class="eyebrow" id="ss-eyebrow"></p>
+  <h1 class="h-mid" id="ss-title"></h1>
+  <p class="lead" id="ss-lead"></p>
+  <button class="btn primary" id="b-simgo" type="button" style="margin-top:14px"><span class="t" data-i18n="simstart.lancer_la_simulation">Lancer la simulation</span><span class="s" id="ss-go-s"></span></button>
+  <details class="ss-detail">
+    <summary data-i18n="simstart.les_regles_et_le">Les règles et le programme en détail</summary>
+    <h2 data-i18n="simstart.les_regles">Les règles</h2>
+    <ul class="rules" id="ss-rules"></ul>
+    <h2 data-i18n="simstart.au_programme">Au programme</h2>
+    <ul class="rules" id="ss-prog"></ul>
+    <p class="src" style="margin-top:14px" id="ss-note"></p>
+  </details>
+</section>
+
+<section id="sim" hidden>
+  <div class="simbar">
+    <div class="top">
+      <button class="link" id="b-simquit" type="button" data-i18n="sim.simquit">Abandonner</button>
+      <div class="score" id="sim-time" role="timer" aria-live="off">60:00</div>
+    </div>
+    <div class="tabs">
+      <button class="tab sel" id="t-quiz" type="button" data-i18n="sim.t_quiz">Quiz</button>
+      <button class="tab" id="t-cas" type="button" data-i18n="sim.t_cas">Cas pratique</button>
+    </div>
+  </div>
+  <div id="sim-quiz">
+    <div class="qgrid" id="qgrid"></div>
+    <p class="src" style="margin:0 0 14px" data-i18n="sim.case_pleine_repondue_point">Case pleine : répondue. Point rouge : marquée pour y revenir.</p>
+    <p class="eyebrow" id="sq-meta"></p>
+    <div class="ctx" id="sq-ctx" hidden></div>
+    <h2 class="q" id="sq-text"></h2>
+    <button class="link" id="b-sqbareme" type="button" hidden data-i18n="sim.sqbareme">Afficher le barème fourni</button>
+    <div class="bareme" id="sqbareme" hidden></div>
+    <div id="sq-opts"></div>
+    <button class="link" id="b-sqflag" type="button" data-i18n="sim.sqflag">☆ Marquer pour y revenir</button>
+    <div class="navrow">
+      <button class="btn" id="b-sqprev" type="button"><span class="t" data-i18n="sim.precedente">← Précédente</span></button>
+      <button class="btn" id="b-sqnext" type="button"><span class="t" id="b-sqnext-t" data-i18n="sim.sqnext_t">Suivante →</span></button>
+    </div>
+  </div>
+  <div id="sim-cas" hidden>
+    <p class="eyebrow" id="sc-meta"></p>
+    <h1 class="h-small" id="sc-title"></h1>
+    <div class="ctx" id="sc-ctx"></div>
+    <button class="link" id="b-scbareme" type="button" hidden data-i18n="sim.scbareme">Afficher le barème fourni</button>
+    <div class="bareme" id="scbareme" hidden></div>
+    <div id="sc-subs"></div>
+    <h2 data-i18n="sim.brouillon">Brouillon</h2>
+    <textarea class="field" id="sc-bro" rows="6" placeholder="Pose tes calculs ici, comme sur une feuille d'examen." data-i18n-ph="sim.sc_bro_ph"></textarea>
+  </div>
+  <div style="margin-top:20px">
+    <button class="btn primary" id="b-simsubmit" type="button"><span class="t" id="b-simsubmit-t" data-i18n="sim.simsubmit_t">Rendre ma copie</span><span class="s" id="b-simsubmit-s"></span></button>
+  </div>
+</section>
+
+<section id="simres" hidden>
+  <p class="eyebrow" id="sr-meta"></p>
+  <h1 class="h-mid" data-i18n="simres.resultat_de_la_simulation">Résultat de la simulation</h1>
+  <div class="sum" id="sr-sum"></div>
+  <p class="src" id="sr-note"></p>
+  <h2 data-i18n="simres.quiz_par_theme">Quiz par thème</h2>
+  <div id="sr-themes"></div>
+  <h2 data-i18n="simres.cas_pratique">Cas pratique</h2>
+  <div id="sr-cas"></div>
+  <div id="sr-missed-wrap">
+    <h2 data-i18n="simres.quiz_a_revoir">Quiz : à revoir</h2>
+    <div id="sr-missed"></div>
+  </div>
+  <div id="sr-actions" style="margin-top:18px"></div>
+</section>
+
+<section id="exlist" hidden>
+  <h1 class="h-mid" data-i18n="exlist.exercices_rediges">Exercices rédigés</h1>
+  <p class="lead" id="exl-lead"></p>
+  <button class="link" id="b-exfilter" type="button" data-i18n="exlist.exfilter">Voir seulement les marqués</button>
+  <div id="exitems"></div>
+</section>
+
+<section id="ex" hidden>
+  <div class="top">
+    <button class="link" id="b-exmark" type="button" aria-pressed="false" data-i18n="ex.exmark">☆ Marquer</button>
+    <div class="score" id="ex-time">00:00</div>
+  </div>
+  <div class="seg" id="ex-mode">
+    <button class="seg-b" id="ex-mode-guide" type="button" aria-pressed="true" data-i18n="ex.ex_mode_guide">Guidé</button>
+    <button class="seg-b" id="ex-mode-exam" type="button" aria-pressed="false" data-i18n="ex.ex_mode_exam">Comme à l'examen</button>
+  </div>
+  <p class="src ex-mode-s" id="ex-mode-s"></p>
+  <p class="eyebrow" id="ex-meta"></p>
+  <h1 class="h-small" id="ex-title"></h1>
+  <div class="ctx" id="ex-ctx"></div>
+  <button class="link" id="b-exbareme" type="button" hidden data-i18n="ex.exbareme">Afficher le barème fourni</button>
+  <div class="bareme" id="exbareme" hidden></div>
+  <button class="link rep-b" id="b-exrep" type="button" aria-controls="exrep" aria-expanded="false" hidden data-i18n="ex.exrep">Où trouver ça dans les documents ?</button>
+  <div class="rep" id="exrep" hidden></div>
+  <div class="sum" id="ex-summary" hidden></div>
+  <div class="ex-gnav" id="ex-gnav" hidden>
+    <button class="link" id="b-exg-prev" type="button" data-i18n="ex.exg_prev">‹ Précédente</button>
+    <span class="ex-gpos" id="ex-gpos"></span>
+    <button class="link" id="b-exg-next" type="button" data-i18n="ex.exg_next">Suivante ›</button>
+  </div>
+  <div id="ex-subs"></div>
+  <div id="ex-ask-home">
+    <div class="ask" id="ex-ask" hidden>
+      <button class="btn" id="b-exq-open" type="button"><span class="t" data-i18n="ex.poser_une_question_a">Poser une question à Claude</span><span class="s" id="exq-sub"></span></button>
+      <div class="aibox" id="exq-box" hidden>
+        <div class="exq-h">
+          <p class="eyebrow" id="exq-focus" data-i18n="ex.exq_focus">Question à Claude</p>
+          <button class="link" id="b-exq-close" type="button" data-i18n="ex.exq_close">Réduire</button>
+        </div>
+        <button class="link" id="b-exq-all" type="button" hidden data-i18n="ex.exq_all">Poser plutôt sur tout l'exercice</button>
+        <div class="aitext" id="exq-text" aria-live="polite"></div>
+        <p class="src" id="exq-note"></p>
+        <button class="link" id="b-exq-stop" type="button" hidden data-i18n="ex.exq_stop">Arrêter</button>
+        <div class="chips" id="exq-chips"></div>
+        <form class="aform" id="exq-form" autocomplete="off">
+          <input id="exq-input" type="text" placeholder="Ta question…" aria-label="Ta question à Claude" data-i18n-aria="ex.exq_input_aria" data-i18n-ph="ex.exq_input_ph">
+          <button id="b-exq-send" type="submit" data-i18n="ex.exq_send">Envoyer</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <h2 data-i18n="ex.brouillon">Brouillon</h2>
+  <textarea class="field" id="ex-bro" rows="6" placeholder="Pose tes calculs ici, comme sur une feuille d'examen." data-i18n-ph="ex.ex_bro_ph"></textarea>
+  <div id="ex-actions" style="margin-top:14px"></div>
+  <div class="aibox" id="ex-ai" hidden>
+    <p class="eyebrow" style="margin-bottom:8px" data-i18n="ex.avis_de_claude_sur">Avis de Claude sur ta copie</p>
+    <div class="pre" id="ex-ai-text" aria-live="polite"></div>
+    <p class="src" id="ex-ai-note"></p>
+    <button class="link" id="b-exai-stop" type="button" hidden data-i18n="ex.exai_stop">Arrêter</button>
+  </div>
+</section>
+
+</div>
+<header class="appbar" id="appbar" hidden>
+  <button class="nav-retour" id="nav-retour" type="button" hidden><svg class="ic-ret" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5L8 12l6.5 6.5"/></svg><svg class="ic-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span id="nav-retour-lab" data-i18n="nav.nav_retour_lab">Retour</span></button>
+  <p class="nav-titre" id="nav-titre"></p>
+</header>
+<nav class="ongs" id="tabbar" aria-label="Navigation" hidden data-i18n-aria="nav.tabbar_aria">
+  <button type="button" class="ong" id="tab-hub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7"/><path d="M6 9.5V20h12V9.5"/></svg><span data-i18n="nav.aujourd_hui">Aujourd'hui</span></button>
+  <button type="button" class="ong" id="tab-rev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5C6.5 4.5 9.5 4.5 12 6c2.5-1.5 5.5-1.5 8-.5V19c-2.5-1-5.5-1-8 .5-2.5-1.5-5.5-1.5-8-.5z"/><path d="M12 6v13.5"/></svg><span data-i18n="nav.reviser">Réviser</span></button>
+  <button type="button" class="ong" id="b-agenda"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span data-i18n="nav.agenda">Agenda</span></button>
+  <button type="button" class="ong" id="tab-evol"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16"/><path d="M5 15l4.5-4.5 3.5 3 6-6.5"/></svg><span data-i18n="nav.progres">Progrès</span></button>
+  <button type="button" class="ong" id="tab-prof"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.3 7.5-5.3s6.3 1.7 7.5 5.3"/></svg><span data-i18n="nav.profil">Profil</span></button>
+</nav>
+</div>
+<div class="menu-voile" id="menu-voile" hidden></div>
+<div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Univers" hidden data-i18n-aria="menu.menu_aria">
+  <div class="menu-tete"><p class="menu-t" data-i18n="menu.univers">Univers</p><button class="link" id="menu-fermer" type="button" data-i18n="menu.menu_fermer">Fermer</button></div>
+  <div class="menu-univ" id="menu-univ">
+    <p class="menu-lab" data-i18n="menu.passe_d_un_univers">Passe d'un univers à l'autre</p>
+    <div class="univ-liste" id="menu-univ-liste"></div>
+  </div>
+</div>
+<div class="cosmos" id="cosmos" aria-hidden="true" hidden>
+  <canvas class="cos-ciel" id="cos-loin"></canvas>
+  <canvas class="cos-ciel" id="cos-pres"></canvas>
+  <div class="cos-piste" id="cos-piste"></div>
+</div>
+<p class="cos-annonce" id="cos-annonce" aria-live="polite"></p>
+<button type="button" class="calc-b" id="b-calc" aria-expanded="false" aria-controls="calc" aria-keyshortcuts="Alt+C" title="Calculatrice (Alt + C)" aria-label="Calculatrice" data-i18n-aria="calc.calc_aria" data-i18n-title="calc.calc_title"><span aria-hidden="true">＝</span></button>
+<div class="calc" id="calc" role="dialog" aria-label="Calculatrice" hidden data-i18n-aria="calc.calc_dialog_aria">
+  <div class="calc-t"><label for="calc-in" data-i18n="calc.calculatrice">Calculatrice</label><span class="calc-k" id="calc-raccourci">Alt + C</span><button type="button" class="nav-ico" id="calc-fermer" aria-label="Fermer la calculatrice" data-i18n-aria="calc.calc_fermer_aria">✕</button></div>
+  <input class="field" id="calc-in" type="text" inputmode="decimal" autocomplete="off" spellcheck="false" placeholder="Tape un calcul" data-i18n-ph="calc.calc_in_ph">
+  <p class="calc-out" id="calc-out" aria-live="polite"></p>
+  <div class="calc-hist" id="calc-hist" aria-label="Derniers calculs" data-i18n-aria="calc.calc_hist_aria"></div>
+  <div class="calc-pad" id="calc-pad" role="group" aria-label="Touches de la calculatrice" data-i18n-aria="calc.calc_pad_aria"></div>
+  <p class="src calc-aide" id="calc-aide" data-i18n="calc.calc_aide">Entrée garde le résultat dans la liste. Opérations : + − × ÷ ( ) et %.</p>
+</div>
+<button type="button" class="sel-btn" id="sel-btn" hidden data-i18n="sel.sel_btn">Demander à Claude</button>
+<button type="button" class="sel-plus" id="sel-plus" hidden aria-haspopup="menu" aria-expanded="false" aria-controls="sel-menu" aria-label="Autres actions sur ce passage" data-i18n-aria="sel.sel_plus_aria">+</button>
+<div class="sel-menu" id="sel-menu" role="menu" hidden>
+  <div class="sel-nt" id="sel-nt" role="group" aria-labelledby="sel-nt-l" hidden>
+    <p class="sel-nt-l" id="sel-nt-l" data-i18n="sel.sel_nt_l">Surligner</p>
+    <div class="nt-couls">
+      <button type="button" role="menuitem" class="sel-mi nt-coul" id="b-sel-c1" data-c="1"><span class="nt-pastille nt-c1" aria-hidden="true"></span><span data-i18n="sel.jaune">Jaune</span></button>
+      <button type="button" role="menuitem" class="sel-mi nt-coul" id="b-sel-c2" data-c="2"><span class="nt-pastille nt-c2" aria-hidden="true"></span><span data-i18n="sel.vert">Vert</span></button>
+      <button type="button" role="menuitem" class="sel-mi nt-coul" id="b-sel-c3" data-c="3"><span class="nt-pastille nt-c3" aria-hidden="true"></span><span data-i18n="sel.bleu">Bleu</span></button>
+    </div>
+    <button type="button" role="menuitem" class="sel-mi" id="b-sel-note" data-i18n="sel.sel_note">Ajouter une note</button>
+    <hr class="sel-sep">
+  </div>
+  <button type="button" role="menuitem" class="sel-mi" id="b-sel-sig" data-i18n="sel.sel_sig">Signaler une erreur</button>
+  <button type="button" role="menuitem" class="sel-mi" id="b-sel-idee" data-i18n="sel.sel_idee">Proposer une idée</button>
+</div>
+<div class="sel-bulle" id="sel-bulle" role="dialog" aria-labelledby="sel-titre" hidden>
+  <div class="sel-tete"><p class="sel-titre" id="sel-titre" data-i18n="sel.sel_titre">Ta question sur ce passage</p><button class="nav-ico" id="sel-fermer" type="button" aria-label="Fermer la question" data-i18n-aria="sel.sel_fermer_aria"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <blockquote class="sel-cite" id="sel-cite"></blockquote>
+  <p class="src sel-lieu" id="sel-lieu"></p>
+  <p class="src sel-cache" id="sel-cache" hidden data-i18n="sel.sel_cache">Tu n'as pas encore répondu : Claude t'aide à trouver sans donner la réponse.</p>
+  <div class="chips" id="sel-chips"></div>
+  <div class="sel-fil" id="sel-fil" aria-live="polite"></div>
+  <textarea class="field" id="sel-q" rows="2" placeholder="Ta question sur ce passage…" aria-label="Ta question" data-i18n-aria="sel.sel_q_aria" data-i18n-ph="sel.sel_q_ph"></textarea>
+  <div class="sel-actions"><button type="button" class="sbtn" id="sel-go" data-i18n="sel.sel_go">Demander</button><button type="button" class="link" id="sel-stop" hidden data-i18n="sel.sel_stop">Arrêter</button></div>
+  <p class="src" id="sel-note" role="status"></p><div id="sel-zone"></div>
+  <p class="src sel-cout" id="sel-cout" data-i18n="sel.sel_cout">Seule l'aide de Claude utilise ton forfait Claude.</p>
+</div>

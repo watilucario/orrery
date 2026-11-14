@@ -1,0 +1,30 @@
+{
+  "id": "memoire",
+  "modele": "matiere-de-cours",
+  "statut": "prête",
+  "titre": "Memory and revision",
+  "titre_h1": "Memory and revision quiz",
+  "stockage": "orr.demo.memoire.",
+  "accueil": {
+    "surtitre": "Demo · how we remember",
+    "resume": "Forgetting curve, spaced repetition (FSRS), active recall",
+    "intro": "This course explains why the daily session works. Start with it, then choose how you want to study.",
+    "sources": "Sources: Ebbinghaus's work (1885) on forgetting, research on the spacing effect and the testing effect, the open-source open-spaced-repetition project (FSRS). The values on the curve are recomputed with the simplified form given in the course sheet."
+  },
+  "themes": [
+    {"id": "oubli", "nom": "The forgetting curve"},
+    {"id": "espacement", "nom": "Spaced repetition"},
+    {"id": "rappel", "nom": "Active recall"}
+  ],
+  "blocs": {
+    "seance_du_jour": {},
+    "qcm": {"serie_rapide": {"oubli": 5, "espacement": 5, "rappel": 5}},
+    "cas": {},
+    "exercices": {
+      "intro": "Calculations with the course sheet's retention curve, then a written answer.",
+      "note": "Values are recomputed with the simplified form of the curve (fixed slope)."
+    },
+    "aide_claude": false,
+    "progression": {}
+  }
+}
